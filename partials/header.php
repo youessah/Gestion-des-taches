@@ -13,12 +13,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./public/design/style.css">
+    <link rel="stylesheet" href="./public/design/style.css?v=<?= time() . '2' ?>">
     <link rel="stylesheet" href="./public/boxicons-2.1.4/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script defer src="./public/scripts/app.js"></script>
     <title><?= $title ?></title>
 </head>
-<header>
+<header style="<?php if(isset($_GET['p']) && $_GET['p'] == 'login'){ echo 'display: none;'; } ?>">
     <?php if(isset($_SESSION['status'])): ?>
         <?php if($_SESSION['status'] == 'employe'): ?>
             <a href="index.php?p=userHome" class="logo"> <i class="bx bxl-apple"></i> <h2>CAT</h2></a>

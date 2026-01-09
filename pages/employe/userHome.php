@@ -62,15 +62,17 @@
                         </div>
                     </div>
                 </div>
-                <h3>Tâches Récentes</h3>
-                <div class="users">
+                <div class="card-responsive">
+                    <div class="title">
+                        <h2>Tâches Récentes</h2>
+                    </div>
                     <table>
                         <thead>
                             <tr>
                                 <td>Nom</td>
                                 <td>Tache</td>
                                 <td>Status</td>
-                                <td></td>
+                                <td>Action</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,8 +80,8 @@
                                 <tr>
                                     <td><?= $tache->nom ?></td>
                                     <td><?= $tache->titre ?></td>
-                                    <td><?= $tache->status ?></td>
-                                    <td><a href="index.php?p=detailTacheUser&id=<?= $tache->id ?>">Détail</a></td>
+                                    <td><span style="padding: 5px 10px; background: #e0f2fe; color: #0284c7; border-radius: 20px; font-size: 0.8rem;"><?= $tache->status ?></span></td>
+                                    <td><a href="index.php?p=detailTacheUser&id=<?= $tache->id ?>" class="btn" style="background: var(--primary-light); color: var(--primary-color);">Détail</a></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

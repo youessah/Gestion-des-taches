@@ -15,12 +15,17 @@ const btnShowForm = document.querySelector('.btnShowForm');
 const formAddEmploye = document.querySelector('form.add');
 const container = document.querySelector('.container');
 const btnCloseForm = document.querySelector('form.add .close');
-btnShowForm.addEventListener('click', () => {
-    formAddEmploye.classList.add('show');
-    container.style.opacity = '0.5';
-});
 
-btnCloseForm.addEventListener('click', () => {
-    formAddEmploye.classList.remove('show');
-    container.style.opacity = '1';
-})
+if(btnShowForm && formAddEmploye) {
+    btnShowForm.addEventListener('click', () => {
+        formAddEmploye.classList.add('show');
+        if(container) container.style.opacity = '0.5';
+    });
+}
+
+if(btnCloseForm && formAddEmploye) {
+    btnCloseForm.addEventListener('click', () => {
+        formAddEmploye.classList.remove('show');
+        if(container) container.style.opacity = '1';
+    });
+}

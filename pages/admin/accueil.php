@@ -61,38 +61,45 @@
                         </div>
                     </div>
                 </div>
-                <h3>Employes</h3>
-                <div class="users">
-                    <div class="scroll">
-                        <?php foreach($employeList as $employe): ?>
-                            <div class="user-card">
-                                <a href="index.php?p=detailEmploye&id=<?= $employe->id ?>">
-                                    <div class="image-circle">
-                                        <img src="./public/pictures/<?= $employe->photo ?>" alt="">
-                                    </div>
-                                    <h4><?= $employe->nom ?></h4>
-                                    <span><?= $employe->nbTache ?> tâches</span>
+                <div class="card-responsive" style="margin-bottom: 20px;">
+                    <div class="title">
+                        <h2>Employés</h2>
+                        <a href="index.php?p=employe">Voir tout <i class="bx bx-right-arrow-alt"></i></a>
+                    </div>
+                    <div class="users">
+                        <div class="scroll">
+                            <?php foreach($employeList as $employe): ?>
+                                <div class="user-card">
+                                    <a href="index.php?p=detailEmploye&id=<?= $employe->id ?>">
+                                        <div class="image-circle">
+                                            <img src="./public/pictures/<?= $employe->photo ?>" alt="">
+                                        </div>
+                                        <h4><?= $employe->nom ?></h4>
+                                        <span><?= $employe->nbTache ?> tâches</span>
+                                    </a>
+                                </div>
+                            <?php endforeach; ?>
+                            <div class="user-card" style="justify-content: center;">
+                                <a href="index.php?p=employe" style="flex-direction: column; display: flex; align-items: center; color: var(--primary-color);">
+                                    <i class="bx bx-plus-circle" style="font-size: 2rem;"></i>
+                                    <h4>Ajouter</h4>
                                 </a>
                             </div>
-                        <?php endforeach; ?>
-                    </div>
-                    <div class="add">
-                        <a href="index.php?p=employe">
-                            <i class="bx bx-plus"></i>
-                            <h4>Voir plus</h4>
-                        </a>
-                        <span>Ajouter</span>
+                        </div>
                     </div>
                 </div>
-                <h3>Tâches en cours...</h3>
-                <div class="users">
+
+                <div class="card-responsive">
+                    <div class="title">
+                        <h2>Tâches en cours</h2>
+                    </div>
                     <table>
                         <thead>
                             <tr>
                                 <td>Nom</td>
                                 <td>Tache</td>
                                 <td>Status</td>
-                                <td></td>
+                                <td>Action</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,8 +107,8 @@
                                 <tr>
                                     <td><?= $tache->nom ?></td>
                                     <td><?= $tache->titre ?></td>
-                                    <td><?= $tache->status ?></td>
-                                    <td><a href="index.php?p=detailTache&id=<?= $tache->id ?>">Détail</a></td>
+                                    <td><span style="padding: 5px 10px; background: #e0f2fe; color: #0284c7; border-radius: 20px; font-size: 0.8rem;"><?= $tache->status ?></span></td>
+                                    <td><a href="index.php?p=detailTache&id=<?= $tache->id ?>" class="btn" style="background: var(--primary-light); color: var(--primary-color);">Détail</a></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

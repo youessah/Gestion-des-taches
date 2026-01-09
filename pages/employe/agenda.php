@@ -15,56 +15,39 @@
                 <div class="card-responsive">
                     <div class="title">
                         <h2>Proramme de la semaine</h2>
-                        <?php if($_SESSION['status'] == 'admin'): ?>
-                          <a href="index.php?p=addAgenda" >Ajouter <i class="bx bx-user-plus"></i></a>
-                        <?php endif; ?>
+                        <a href="index.php?p=addAgenda" class="btnShowForm">Ajouter <i class="bx bx-plus-circle"></i></a>
                         </div>
                     
                     <table>
-                        <tr>
-                            <th class="employee-header">Lundi</th>
-                            <th class="employee-header">Mardi</th>
-                            <th class="employee-header">Mercredi</th>
-                            <th class="employee-header">Jeudi</th>
-                            <th class="employee-header">Vendredi</th>
-                            <th class="employee-header">Samedi</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th class="employee-header" style="text-align: left; padding-left: 15px;">Employé</th>
+                                <th class="employee-header">Lun</th>
+                                <th class="employee-header">Mar</th>
+                                <th class="employee-header">Mer</th>
+                                <th class="employee-header">Jeu</th>
+                                <th class="employee-header">Ven</th>
+                                <th class="employee-header">Sam</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         <?php foreach($employeList as $emp): ?>
                         <tr>
-                            <?php if(str_contains($emp->agenda, 'lundi')){ echo "<th>".$emp->nom."</th>"; }else{ echo "<th>---</>"; } ?>
-                            <?php if(str_contains($emp->agenda, 'mardi')){ echo "<th>".$emp->nom."</th>"; }else{ echo "<th>---</>"; } ?>
-                            <?php if(str_contains($emp->agenda, 'mercredi')){ echo "<th>".$emp->nom."</th>"; }else{ echo "<th>---</>"; } ?>
-                            <?php if(str_contains($emp->agenda, 'jeudi')){ echo "<th>".$emp->nom."</th>"; }else{ echo "<th>---</>"; } ?>
-                            <?php if(str_contains($emp->agenda, 'vendredi')){ echo "<th>".$emp->nom."</th>"; }else{ echo "<th>---</>"; } ?>
-                            <?php if(str_contains($emp->agenda, 'samedi')){ echo "<th>".$emp->nom."</th>"; }else{ echo "<th>---</>"; } ?>
+                            <td style="font-weight: 600; text-align: left; padding-left: 15px;"><?= htmlspecialchars($emp->nom) ?></td>
+                            <td><?php if(strpos($emp->agenda, 'lundi') !== false){ echo "<span class='badge success'><i class='bx bx-check'></i></span>"; }else{ echo "<span style='color: #ccc;'>-</span>"; } ?></td>
+                            <td><?php if(strpos($emp->agenda, 'mardi') !== false){ echo "<span class='badge success'><i class='bx bx-check'></i></span>"; }else{ echo "<span style='color: #ccc;'>-</span>"; } ?></td>
+                            <td><?php if(strpos($emp->agenda, 'mercredi') !== false){ echo "<span class='badge success'><i class='bx bx-check'></i></span>"; }else{ echo "<span style='color: #ccc;'>-</span>"; } ?></td>
+                            <td><?php if(strpos($emp->agenda, 'jeudi') !== false){ echo "<span class='badge success'><i class='bx bx-check'></i></span>"; }else{ echo "<span style='color: #ccc;'>-</span>"; } ?></td>
+                            <td><?php if(strpos($emp->agenda, 'vendredi') !== false){ echo "<span class='badge success'><i class='bx bx-check'></i></span>"; }else{ echo "<span style='color: #ccc;'>-</span>"; } ?></td>
+                            <td><?php if(strpos($emp->agenda, 'samedi') !== false){ echo "<span class='badge success'><i class='bx bx-check'></i></span>"; }else{ echo "<span style='color: #ccc;'>-</span>"; } ?></td>
                         </tr>
                         <?php endforeach; ?>
-                        </table>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <?php include('./partials/right-side.php') ?>
         </div>
     </div>
 </body>
-<style>
-      table {
-        border-collapse: collapse;
-      }
-      th,
-      td {
-        border: 1px solid black;
-        padding: 10px 20px;
-      }
-      th {
-        font-weight: bold;
-        font-size: 14px;
-      }
-      tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-      .employee-header {
-        background-color: #277de0;
-        color: #fff;
-      }
-    </style>
 </html>

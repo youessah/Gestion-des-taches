@@ -25,20 +25,32 @@
         <div class="main">
             <?php include('./partials/left-side.php') ?>
             <div class="content">
-                <div class="card-responsive">
+                <div class="card-responsive settings-card">
                     <div class="title">
                         <h2>Demander un congé</h2>
                         <a href="index.php?p=congeUser"><i class="bx bx-left-arrow"></i> Retour</a>
                     </div>
-                    <div class="card">
-                        <div class="info">
-                            <label for="motif">Entrez le motif</label>
-                            <textarea name="motif" id="motif" cols="30" rows="10"></textarea>
-                            <label for="date_debut">Entrez la date de début</label>
-                            <input type="date" name="date_debut" id="date_debut" required>
-                            <label for="date_fin">Entrez la date de fin</label>
-                            <input type="date" name="date_fin" id="date_fin" required>
-                            <button type="submit" name="valider">Effectuer la demande <i class="bx bx-edit"></i></button>
+                    <div class="card-settings-content">
+                        <div class="info-edit">
+                            <div class="form-group">
+                                <label for="motif">Motif de la demande</label>
+                                <textarea name="motif" id="motif" cols="30" rows="5" placeholder="Expliquez la raison de votre congé..." style="padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; font-family: 'Poppins';"></textarea>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="date_debut">Date de début</label>
+                                    <input type="date" name="date_debut" id="date_debut" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="date_fin">Date de fin</label>
+                                    <input type="date" name="date_fin" id="date_fin" required>
+                                </div>
+                            </div>
+
+                            <button type="submit" name="valider" class="btn-save">
+                                Envoyer la demande <i class="bx bx-send"></i>
+                            </button>
                         </div>
                     </div>
                 </div>

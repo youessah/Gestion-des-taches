@@ -14,7 +14,7 @@
     </div>
     <div class="card-list">
         <div class="title">
-            <h4>Meilleurs Employé</h4>
+            <h4>Meilleurs Employés</h4>
             <div><i class="bx bx-bell"></i></div>
         </div>
         <?php foreach($employe as $emp): ?>

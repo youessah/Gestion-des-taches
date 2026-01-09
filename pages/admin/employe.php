@@ -54,7 +54,7 @@
             <?php include('./partials/right-side.php') ?>
         </div>
     </div>
-    <form method="post" action="index.php?p=addEmploye" class="add formAddEmploye">
+    <form method="post" action="index.php?p=addEmploye" class="add formAddEmploye" enctype="multipart/form-data">
         <div class="close">
             <span>X</span>
         </div>

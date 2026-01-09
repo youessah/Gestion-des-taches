@@ -106,6 +106,10 @@ if(isset($_SESSION['id'])){
 
         $title = 'Demander un congé';
         require './pages/employe/demandeConge.php';
+    }elseif($p === 'addTaskUser'){
+
+        $title = 'Ajouter une tâche';
+        require './pages/employe/addTaskUser.php';
     }elseif($p === 'congeUser'){
 
         $title = 'Congés';

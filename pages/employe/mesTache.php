@@ -15,6 +15,7 @@
                 <div class="card-responsive">
                     <div class="title">
                         <h2>Mes tâches</h2>
+                        <a href="index.php?p=addTaskUser" class="btnShowForm">Ajouter une tâche <i class="bx bx-plus-circle"></i></a>
                     </div>
                     <table>
                         <thead>
@@ -30,11 +31,11 @@
                                 <tr>
                                     <td><?= $tache->titre ?></td>
                                     <td><?= $tache->duree ?>H</td>
-                                    <td><?= $tache->status ?></td>
+                                    <td><span class="badge warning"><?= $tache->status ?></span></td>
                                     <td>
                                         <div class="btn-group">
                                             <a class="btn" href="index.php?p=detailTacheUser&id=<?= $tache->id ?>">Détails <i class="bx bx-edit"></i></a>
-                                            <a style="background: #08e677; color: #000" class="btn success" href="index.php?p=tacheDone&id=<?= $tache->id ?>">Terminer <i class="bx bx-check"></i></a>
+                                            <a class="btn success" href="index.php?p=tacheDone&id=<?= $tache->id ?>">Terminer <i class="bx bx-check"></i></a>
                                         </div>
                                     </td>
                                 </tr>

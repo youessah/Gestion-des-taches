@@ -30,10 +30,14 @@
                                 <tr>
                                     <td><?= $tache->titre ?></td>
                                     <td><?= $tache->duree ?>H</td>
-                                    <td><?= $tache->status ?></td>
+                                    <?php if($tache->status == 'Terminée'): ?>
+                                        <td><span class="badge success"><?= $tache->status ?></span></td>
+                                    <?php else: ?>
+                                        <td><span class="badge warning"><?= $tache->status ?></span></td>
+                                    <?php endif; ?>
                                     <td>
                                         <div class="btn-group">
-                                            <a class="btn" href="index.php?p=detailTacheUser&id=<?= $tache->id ?>">Détails <i class="bx bx-edit"></i></a>
+                                            <a class="btn" href="index.php?p=detailTacheUser&id=<?= $tache->id ?>">Détails <i class="bx bx-show"></i></a>
                                         </div>
                                     </td>
                                 </tr>

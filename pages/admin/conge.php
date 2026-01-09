@@ -16,6 +16,7 @@
                 <div class="card-responsive">
                     <div class="title">
                         <h2>Liste des congés</h2>
+                        <a href="index.php?p=demandeConge" class="btnShowForm">Demander un congé <i class="bx bx-plus-circle"></i></a>
                     </div>
                     <table>
                         <thead>
@@ -36,11 +37,11 @@
                                     <td><?= $con->date_debut ?></td>
                                     <td><?= $con->date_fin ?></td>
                                     <?php if($con->statut == 'Refuser'): ?>
-                                        <td style="color: red"><?= $con->statut ?></td>
+                                        <td><span class="badge danger"><?= $con->statut ?></span></td>
                                     <?php elseif( $con->statut == 'Accepter'): ?>
-                                        <td style="color: green"><?= $con->statut ?></td>
+                                        <td><span class="badge success"><?= $con->statut ?></span></td>
                                     <?php elseif( $con->statut == 'En cours..'): ?>
-                                        <td style="color: blue"><?= $con->statut ?></td>
+                                        <td><span class="badge warning"><?= $con->statut ?></span></td>
                                     <?php endif; ?>
                                     <td>
                                         <div class="btn-group">
