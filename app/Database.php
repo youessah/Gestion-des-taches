@@ -1,7 +1,7 @@
 <?php
 
 class Database{
-    static private $db_host = 'localhost';
+    static private $db_host = '127.0.0.1';
     static private $db_name = 'gestiont_des_taches'; 
     static private $db_charset = 'utf8'; 
     static private $db_user = 'root'; 

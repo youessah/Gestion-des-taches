@@ -1,6 +1,6 @@
 <?php
     $db = Database::Connect();
-    $query = $db->query("SELECT * FROM conge c INNER JOIN utilisateur u ON u.id = c.id_user WHERE c.id_user = ". $_SESSION['id']);
+    $query = $db->query($sql = "SELECT * FROM conge c INNER JOIN utilisateur u ON u.id = c.id_user WHERE c.id_user = " . (int) $_SESSION['id']);
     $con = $query->fetch(PDO::FETCH_OBJ);
     
 

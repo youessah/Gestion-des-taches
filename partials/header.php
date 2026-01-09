@@ -21,12 +21,12 @@
 <header>
     <?php if(isset($_SESSION['status'])): ?>
         <?php if($_SESSION['status'] == 'employe'): ?>
-            <a href="index.php?p=userHome" class="logo"> <i class="bx bxl-apple"></i> <h2>Dirane Code</h2></a>
+            <a href="index.php?p=userHome" class="logo"> <i class="bx bxl-apple"></i> <h2>CAT</h2></a>
         <?php else: ?>
-            <a href="index.php?p=home" class="logo"> <i class="bx bxl-apple"></i> <h2>Dirane Code</h2></a>
+            <a href="index.php?p=home" class="logo"> <i class="bx bxl-apple"></i> <h2>CAT</h2></a>
         <?php endif; ?>
     <?php else: ?>
-        <a href="#" class="logo"> <i class="bx bxl-apple"></i> <h2>Dirane Code</h2></a>
+        <a href="#" class="logo"> <i class="bx bxl-apple"></i> <h2>CAT</h2></a>
     <?php endif; ?>
     <?php if(isset($_SESSION['id'])): ?>
         <div class="profile">
