@@ -1,11 +1,9 @@
 <?php
     $db = Database::Connect();
-    $query = $db->query("SELECT * FROM utilisateur WHERE status = 'employe'");
-    $employeList = $query->fetchAll(PDO::FETCH_OBJ);
     
     $agenda = "";
     if(isset($_POST['ajouter'])){
-    $id = $_POST['employe'];
+    $id = $_SESSION['id'];
     if(isset($_POST['lundi'])){
       $agenda .= $_POST['lundi']. "\n";
     }
@@ -46,14 +44,7 @@
                     </div>
                     <div class="container">
                       <form action="" method="post">
-                        <div class="employee-container">
-                            <label for="employee">Selectionner l'employé:</label>
-                            <select id="employee" name="employe">
-                                <?php foreach($employeList as $emp): ?>
-                                    <option value="<?= $emp->id ?>"><?= $emp->nom ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+                        <p style="margin: 10px 0; color: var(--text-color);">Cochez les jours où vous êtes disponible :</p>
                         <div class="days-container">
                             <div class="workday-container">
                             <input type="checkbox" id="lundi" name="lundi" value="lundi">

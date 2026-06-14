@@ -3,11 +3,10 @@
 
     if(isset($_GET['id'])){
         $id = $_GET['id'];
-        $query = $db->query("SELECT utilisateur.*, COUNT(*) AS nbTache FROM utilisateur LEFT JOIN tache ON tache.employe = utilisateur.id WHERE utilisateur.id = '$id' GROUP BY(utilisateur.id)");
-        $employe = $query->fetch(PDO::FETCH_OBJ);
+        $stmt = $db->prepare("SELECT utilisateur.*, COUNT(tache.id) AS nbTache FROM utilisateur LEFT JOIN tache ON tache.employe = utilisateur.id WHERE utilisateur.id = ? GROUP BY utilisateur.id");
+        $stmt->execute([$id]);
+        $employe = $stmt->fetch(PDO::FETCH_OBJ);
     }
-    
-
 ?>
 
 

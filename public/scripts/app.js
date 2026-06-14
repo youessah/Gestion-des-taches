@@ -1,14 +1,5 @@
-//Heure et Date
+// App logic goes here
 
-const date = document.querySelector('.date');
-const day = new Date();
-date.textContent = `${day.getDay()}/${day.getDate()}/${day.getFullYear()}`;
-const h2 = document.querySelector('.card-logo h2');
-
-setInterval(()=>{
-    const date = new Date();
-    h2.textContent = `${date.getHours()} : ${date.getMinutes()} : ${date.getSeconds()} AM`;
-}, 1000)
 
 //Modal Form
 const btnShowForm = document.querySelector('.btnShowForm');
@@ -16,16 +7,41 @@ const formAddEmploye = document.querySelector('form.add');
 const container = document.querySelector('.container');
 const btnCloseForm = document.querySelector('form.add .close');
 
-if(btnShowForm && formAddEmploye) {
+if (btnShowForm && formAddEmploye) {
     btnShowForm.addEventListener('click', () => {
         formAddEmploye.classList.add('show');
-        if(container) container.style.opacity = '0.5';
+        if (container) container.style.opacity = '0.5';
     });
 }
 
-if(btnCloseForm && formAddEmploye) {
+if (btnCloseForm && formAddEmploye) {
     btnCloseForm.addEventListener('click', () => {
         formAddEmploye.classList.remove('show');
-        if(container) container.style.opacity = '1';
+        if (container) container.style.opacity = '1';
+    });
+}
+
+// Dark Mode Toggle Logic
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
+const icon = themeToggle ? themeToggle.querySelector('i') : null;
+
+// Vérifier les préférences sauvegardées
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme === 'dark') {
+    body.classList.add('dark-mode');
+    if(icon) { icon.classList.replace('bx-moon', 'bx-sun'); }
+}
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            if(icon) { icon.classList.replace('bx-moon', 'bx-sun'); }
+        } else {
+            localStorage.setItem('theme', 'light');
+            if(icon) { icon.classList.replace('bx-sun', 'bx-moon'); }
+        }
     });
 }

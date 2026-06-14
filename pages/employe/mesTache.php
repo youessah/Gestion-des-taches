@@ -1,8 +1,8 @@
 <?php
-
     $db = Database::Connect();
-    $query = $db->query("SELECT nom, prenom, tache.* FROM tache INNER JOIN utilisateur ON utilisateur.id = tache.employe WHERE tache.employe = ".$_SESSION['id']." AND tache.status = 'En cours...'");
-    $tacheList = $query->fetchAll(PDO::FETCH_OBJ);
+    $stmt = $db->prepare("SELECT u.nom, u.prenom, t.* FROM tache t INNER JOIN utilisateur u ON u.id = t.employe WHERE t.employe = ? AND t.status = 'En cours...'");
+    $stmt->execute([$_SESSION['id']]);
+    $tacheList = $stmt->fetchAll(PDO::FETCH_OBJ);
 ?>
 
 

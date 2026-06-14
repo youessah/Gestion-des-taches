@@ -2,32 +2,34 @@
     $db = Database::Connect();
     $error = null;
     if(isset($_POST['connexion'])){
-        $statut = trim($_POST['statut']);
+        $telephone = trim($_POST['telephone']);
         $password = trim($_POST['password']);
 
-        $query = $db->query("SELECT * FROM utilisateur WHERE status = '$statut'");
-        $result = $query->fetchAll(PDO::FETCH_OBJ);
+        // Utilisation d'une requête préparée pour éviter l'injection SQL
+        $stmt = $db->prepare("SELECT * FROM utilisateur WHERE telephone = ?");
+        $stmt->execute([$telephone]);
+        $usr = $stmt->fetch(PDO::FETCH_OBJ);
 
         $authenticated = false;
-        foreach($result as $usr){
-            if($usr){
-                if(password_verify($password, $usr->password)){
-                    $_SESSION['id'] = $usr->id;
-                    $_SESSION['status'] = $usr->status;
-                    $authenticated = true;
+        if($usr && password_verify($password, $usr->password)){
+            // Régénérer l'ID de session pour prévenir la fixation de session
+            session_regenerate_id(true);
+            
+            $_SESSION['id'] = $usr->id;
+            $_SESSION['status'] = $usr->status;
+            $_SESSION['nom'] = $usr->prenom . ' ' . $usr->nom;
+            $authenticated = true;
 
-                    if($usr->status == 'employe'){
-                        header('location: index.php?p=userHome');
-                    }else{
-                        header('location: index.php?p=home');
-                    }
-                    exit(); // Stop execution immediately after redirect
-                }
+            if($usr->status == 'employe'){
+                header('location: index.php?p=userHome');
+            }else{
+                header('location: index.php?p=home');
             }
+            exit(); 
         }
 
         if(!$authenticated){
-            $error = "Mot de passe incorrect pour le status " . htmlspecialchars($statut) . ". (Reçu: " . strlen($password) . " caractères)";
+            $error = "Identifiants incorrects. Veuillez réessayer.";
         }
     }
 
@@ -56,13 +58,10 @@
                 <?php endif; ?>
 
                 <div class="form-group">
-                    <label for="poste">Poste</label>
+                    <label for="telephone">Identifiant (Téléphone)</label>
                     <div class="input-icon">
-                        <i class='bx bx-user'></i>
-                        <select name="statut" id="poste" class="form-control">
-                            <option value="admin">Administrateur</option>
-                            <option value="employe">Employé</option>
-                        </select>
+                        <i class='bx bx-phone'></i>
+                        <input type="text" name="telephone" id="telephone" placeholder="Entrez votre numéro" required>
                     </div>
                 </div>
 

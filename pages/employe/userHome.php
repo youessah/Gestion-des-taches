@@ -1,22 +1,25 @@
 <?php
     $db = Database::Connect();
+    $userId = $_SESSION['id'];
 
-    $query1 = $db->query("SELECT count(*) FROM tache WHERE employe = ".$_SESSION['id']. " AND status = 'En cours...'");
-    $nbTacheEncours = $query1->fetch();
+    $stmt1 = $db->prepare("SELECT count(*) FROM tache WHERE employe = ? AND status = 'En cours...'");
+    $stmt1->execute([$userId]);
+    $nbTacheEncours = $stmt1->fetch();
 
-    $query2 = $db->query("SELECT count(*) FROM tache WHERE employe = ".$_SESSION['id']);
-    $nbTacheTotal = $query2->fetch();
+    $stmt2 = $db->prepare("SELECT count(*) FROM tache WHERE employe = ?");
+    $stmt2->execute([$userId]);
+    $nbTacheTotal = $stmt2->fetch();
 
-    $query2 = $db->query("SELECT count(*) FROM conge WHERE conge.id_user = ".$_SESSION['id']);
-    $nbCongeTotal = $query2->fetch();
+    $stmt3 = $db->prepare("SELECT count(*) FROM conge WHERE conge.id_user = ?");
+    $stmt3->execute([$userId]);
+    $nbCongeTotal = $stmt3->fetch();
 
     $query = $db->query("SELECT * FROM utilisateur WHERE status = 'employe'");
     $employeList = $query->fetchAll(PDO::FETCH_OBJ);
 
-
-    $query = $db->query("SELECT nom, prenom, tache.* FROM tache INNER JOIN utilisateur ON utilisateur.id = ".$_SESSION['id']);
-    $tacheList = $query->fetchAll(PDO::FETCH_OBJ);
-
+    $stmt4 = $db->prepare("SELECT u.nom, u.prenom, t.* FROM tache t INNER JOIN utilisateur u ON u.id = t.employe WHERE t.employe = ? ORDER BY t.id DESC LIMIT 10");
+    $stmt4->execute([$userId]);
+    $tacheList = $stmt4->fetchAll(PDO::FETCH_OBJ);
 ?>
 
 

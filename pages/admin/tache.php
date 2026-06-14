@@ -49,7 +49,7 @@
                     </table>
                 </div>
             </div>
-            <?php include('./partials/right-side.php') ?>
+            <!-- Removed right-side sidebar -->
         </div>
     </div>
 
@@ -66,7 +66,15 @@
             <?php endforeach; ?>
         </select>
         <textarea name="description" cols="30" rows="10" placeholder="Entrez la description"></textarea>
-        <input type="number" name="duree" placeholder="Entrez la durée">
+        <input type="number" name="duree" placeholder="Entrez la durée (heures)">
+        <div class="form-group">
+            <label style="font-size: 0.8rem; color: #666; display: block; margin-top: 10px;">Date de début</label>
+            <input type="datetime-local" name="date_debut" required>
+        </div>
+        <div class="form-group">
+            <label style="font-size: 0.8rem; color: #666; display: block; margin-top: 10px;">Date de fin (ou échéance)</label>
+            <input type="datetime-local" name="date_fin" required>
+        </div>
         <button type="submit" name="ajouter">Nouvelle tâche</button>
     </form>
 </body>

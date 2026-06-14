@@ -11,9 +11,19 @@
         $description = $_POST['description'];
         $duree = $_POST['duree'];
         $employe = $_SESSION['id']; // Auto-assign
+        $date_debut = $_POST['date_debut'];
+        $date_fin = $_POST['date_fin'];
 
-        $query = $db->prepare("INSERT INTO tache(titre, description, duree, status, employe) VALUES(?,?,?,'En cours...',?)");
-        $query->execute(array($titre,$description,$duree,$employe));
+        $query = $db->prepare("INSERT INTO tache(titre, description, date_debut, date_fin, duree, status, employe) VALUES(?,?,?,?,?,'En cours...',?)");
+        $query->execute(array($titre, $description, $date_debut, $date_fin, $duree, $employe));
+
+        // Notify Admins
+        $notifMsg = "L'employé " . $_SESSION['nom'] . " a créé une nouvelle tâche : " . $titre;
+        $admins = $db->query("SELECT id FROM utilisateur WHERE status = 'admin'")->fetchAll(PDO::FETCH_OBJ);
+        foreach($admins as $admin) {
+            $notifReq = $db->prepare("INSERT INTO notification (user_id, message, type) VALUES (?, ?, 'task')");
+            $notifReq->execute([$admin->id, $notifMsg]);
+        }
 
         header('location: index.php?p=mesTaches');
         exit();
@@ -43,6 +53,17 @@
                             <div class="form-group">
                                 <label>Description</label>
                                 <textarea name="description" rows="4" placeholder="Description détaillée..." style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; font-family: 'Poppins';"></textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Date de début</label>
+                                    <input type="datetime-local" name="date_debut" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Date de fin</label>
+                                    <input type="datetime-local" name="date_fin" required>
+                                </div>
                             </div>
 
                             <div class="form-group">

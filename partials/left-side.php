@@ -1,10 +1,10 @@
 <?php
     if(isset($_SESSION['id'])){
         $db = Database::Connect();
-        $query = $db->query("SELECT * FROM utilisateur WHERE id = ". $_SESSION['id']);
-        $user = $query->fetch(PDO::FETCH_OBJ);
+        $stmt = $db->prepare("SELECT * FROM utilisateur WHERE id = ?");
+        $stmt->execute([$_SESSION['id']]);
+        $user = $stmt->fetch(PDO::FETCH_OBJ);
     }
-
 ?>
 
 <div class="left-side">

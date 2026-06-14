@@ -2,12 +2,22 @@
     $db = Database::Connect();
     if(isset($_GET['id'])){
         $id = $_GET['id'];
+        
         if(isset($_POST['update'])){
-            $query = $db->query("UPDATE tache SET status = 'terminer' WHERE id = $id");
+            // Vérification de sécurité : la tâche doit appartenir à l'utilisateur
+            $stmtCheck = $db->prepare("SELECT employe FROM tache WHERE id = ?");
+            $stmtCheck->execute([$id]);
+            $task = $stmtCheck->fetch(PDO::FETCH_OBJ);
+
+            if($task && ($task->employe == $_SESSION['id'] || $_SESSION['status'] == 'admin')){
+                $stmt = $db->prepare("UPDATE tache SET status = 'Terminée' WHERE id = ?");
+                $stmt->execute([$id]);
+            }
+            
             header('location: index.php?p=mesTaches');
+            exit();
         }
     }
-
 ?>
 
 

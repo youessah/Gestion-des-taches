@@ -55,7 +55,7 @@
                     </table>
                 </div>
             </div>
-            <?php include('./partials/right-side.php') ?>
+            <!-- Removed right-side sidebar for cleaner look -->
         </div>
     </div>
 </body>

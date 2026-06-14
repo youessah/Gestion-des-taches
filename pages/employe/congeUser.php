@@ -1,9 +1,8 @@
 <?php
     $db = Database::Connect();
-    $query = $db->query($sql = "SELECT * FROM conge c INNER JOIN utilisateur u ON u.id = c.id_user WHERE c.id_user = " . (int) $_SESSION['id']);
-    $conges = $query->fetchAll(PDO::FETCH_OBJ);
-    
-
+    $stmt = $db->prepare("SELECT * FROM conge c INNER JOIN utilisateur u ON u.id = c.id_user WHERE c.id_user = ? ORDER BY c.id DESC");
+    $stmt->execute([$_SESSION['id']]);
+    $conges = $stmt->fetchAll(PDO::FETCH_OBJ);
 ?>
 
 
